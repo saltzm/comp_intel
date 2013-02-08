@@ -1,0 +1,6 @@
+#!/bin/bash
+
+scalac -d ./out/ ./src/*/*
+echo "Compilation complete."
+echo "Executing {$1}..."
+scala -classpath ./out $1
