@@ -12,7 +12,6 @@ object Main extends App {
   var genotypeLength = 25
   var lines = Source.fromFile("ExhaustiveResults10x25.txt").getLines()
   var exResults = Array.ofDim[Double](1024, 3)
-
   for (i <- 1 until 1024) {
     var parts = lines.next().trim.split( """\s+""")
     var first = parts(1)
