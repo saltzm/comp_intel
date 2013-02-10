@@ -17,17 +17,21 @@ class GASolver(pSize: Int, gLength: Int, fitFunc: FitnessFunction, selectEng: Se
   var popSize = pSize
   var genotypeLength = gLength
 
+ //   val out = new java.io.FileWriter("genStuff"+selectEng+".txt")
+
   def solve(nGens: Int) {
     pop = new BitBasedPopulation(popSize, genotypeLength)
     calculatePopulationFitness()
     for (i <- 0 until nGens) {
       selector.select(pop)                           //creates new population
+  //  if(i%5==0) out.write(i+"\t"+getSolutionFitness())
       performOperationsOnPopulation()                //performs mutation and crossover on new population
       calculatePopulationFitness()                   //recalculates their fitness values
     }
 
     if (verbose)
       println("Top individual: "+selector.getTopIndividual().individual+" with fitness "+selector.getTopIndividual().fitness)
+   //out.close() 
   }
 
   def getSolutionFitness(): Double = {

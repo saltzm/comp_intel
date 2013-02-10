@@ -25,28 +25,22 @@ object Main extends App {
   var fitnessFunc = new MFDFitnessFunction("TendencyMatrix10x25.txt", 10, 25)
 
   //Experiment parameters
-  var popSizes = Set(160)//Set(80, 120, 160)
-  var crossProbs = Set(0.8)//Set(0.4, 0.6, 0.8, 1)
-  var mutProbs = Set(0.1)// Set(0.0125, 0.0167, 0.025, 0.033, 0.05, 0.066, 0.1, 0.133, 0.2) // Set(0.1, 0.125)//Set(0.001, 0.01, 0.033, 0.05, 0.075, 0.1, 0.15, 0.2)
-  var elitism = Set(true)
+  var popSizes = Set(80, 120, 160)
+  var crossProbs = Set(0.4, 0.6, 0.8, 1)
+  var mutProbs = Set(0.0125, 0.0167, 0.025, 0.033, 0.05, 0.066, 0.08, 0.1, 0.133, 0.2) 
+  var elitism = Set(true,false)
   var start = 1
   var finish = 1024
-  var repetitions = 1
-  //10
-  var nGens = 10
+  var repetitions = 10
+  var nGens = 30
 
-//  thread {
     runExperiment1("resultsRoulette"+System.currentTimeMillis()/10000+".csv")
-//  }
-//  thread {
-//    runExperiment2("resultsTourney"+System.currentTimeMillis()/10000+".csv")
-//  }
+    runExperiment2("resultsTourney"+System.currentTimeMillis()/10000+".csv")
 
 
   def runExperiment1(filename: String) {
     time {
       val out = new java.io.FileWriter(filename, true)
-
       for (popSize <- popSizes) {
         for (crossProb <- crossProbs) {
           for (mutProb <- mutProbs) {
@@ -74,7 +68,7 @@ object Main extends App {
                   //                println("sol fit:\t"+exResults(symptomSet)(0))
                   //                println("try fit:\t"+solver.getSolutionFitness())
                 }
-                println("one")
+                println("run"+ i)
               }
               val firstPerc = ((noFirst / ((finish - start) * repetitions)) * 100)
               val secondPerc = ((noSnd / ((finish - start) * repetitions)) * 100)
@@ -111,9 +105,9 @@ object Main extends App {
 //              thread {
                 val out = new java.io.FileWriter(filename, true)
                 val mr = mutProb//tourneySize/popSize.toDouble
-                println("tourneySize:  "+tourneySize)
-                println("popSize: "+popSize)
-                println("mr: "+mr)
+               // println("tourneySize:  "+tourneySize)
+                //println("popSize: "+popSize)
+                //println("mr: "+mr)
                 var crossEngine = new TwoPointCrossoverEngine(crossProb)
                 //TODO:  look here
                 var mutationEngine = new SimpleMutationEngine(mr) //tourneySize/popSize.toDouble)
