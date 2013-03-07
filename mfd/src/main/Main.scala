@@ -25,14 +25,14 @@ object Main extends App {
   var fitnessFunc = new MFDFitnessFunction("TendencyMatrix10x25.txt", 10, 25)
 
   //Experiment parameters
-  var popSizes = Set(80, 120, 160)
-  var crossProbs = Set(0.4, 0.6, 0.8, 1)
-  var mutProbs = Set(0.0125, 0.0167, 0.025, 0.033, 0.05, 0.066, 0.08, 0.1, 0.133, 0.2) 
-  var elitism = Set(true,false)
+  var popSizes = Set(100)//Set(80, 120, 160)
+  var crossProbs = Set(0.8)// Set(0.4, 0.6, 0.8, 1)
+  var mutProbs = Set(.08)//Set(0.0125, 0.0167, 0.025, 0.033, 0.05, 0.066, 0.08, 0.1, 0.133, 0.2) 
+  var elitism = Set(true)//Set(true,false)
   var start = 1
   var finish = 1024
-  var repetitions = 10
-  var nGens = 30
+  var repetitions = 1
+  var nGens = 50
 
     runExperiment1("resultsRoulette"+System.currentTimeMillis()/10000+".csv")
     runExperiment2("resultsTourney"+System.currentTimeMillis()/10000+".csv")
@@ -65,6 +65,7 @@ object Main extends App {
                   } else if (math.abs(solver.getSolutionFitness() - exResults(symptomSet)(2)) < 1.0e-7) {
                     noThrd += 1
                   }
+                  println(symptomSet)
                   //                println("sol fit:\t"+exResults(symptomSet)(0))
                   //                println("try fit:\t"+solver.getSolutionFitness())
                 }

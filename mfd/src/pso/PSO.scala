@@ -22,27 +22,37 @@ object PSO extends App {
 
   var nGens = 50
   var noReps = 1
-  var popSize = 100
+  var popSize =100
   var start = 1
   var finish = 1024
-
+  val threshold = 1e-7
 
   var noFirst = 0
   for (i <- 0 until noReps) {
     for (sympSet <- 1 until 1024) {
       println(sympSet)
-      fitnessFunc.setMPlus(sympSet)
+        fitnessFunc.setMPlus(sympSet)
 
-      var pop = new PartPop(popSize, 25, 2, 2, 4, 1, fitnessFunc)
-      for (i <- 0 until nGens) {
-        for (part <- pop.pop) {
-          part.update()
-        }
+        var pop = new PartPop(popSize, 25, 2, 2, 4, 1, fitnessFunc)
+        for (i <- 0 until nGens){ 
+          for(part <- pop.pop){
+              part.update(pop.gbest)
+              if (part.fitness > pop.gbestFit){ 
+                pop.gbest = part.x.clone; 
+                pop.gbestFit = part.fitness 
+              }
+          }
+        if (math.abs(pop.gbestFit - exResults(sympSet)(0)) < threshold) noFirst += 1
       }
-      if (math.abs(pop.gbestFit - exResults(sympSet)(0)) < 1e-7) noFirst += 1
     }
   }
-
   println(noFirst.toDouble/(noReps*finish))
 
+  def thread[R](block: => R) = {
+    new Thread(new Runnable {
+      def run() {
+        block
+      }
+    }).start()
+  }
 }
