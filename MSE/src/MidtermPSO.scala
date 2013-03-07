@@ -3,9 +3,9 @@ import collection.mutable.HashMap
 
 object MidtermPSO_Solver extends App {
   val r = new Random()
-  val popSize = 10000
+  val popSize = 100000
   val nGens = 10000
-  val gensToConverge = 10
+  val gensToConverge = 100
   val v_max = 6.0
   val v_min = -6.0
   val repetitions = args(0).toInt
