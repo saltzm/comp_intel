@@ -19,8 +19,8 @@ object PSO_Solver extends App {
   val popSize = 5000
   val nGens = 100000
   val gensToConverge = 1000
-  val v_max = 10.0
-  val v_min = -10.0
+  val v_max = 1.0
+  val v_min = -1.0
 
   val particles = Array.ofDim[Particle](popSize)
   val maxes = Array[Int] (42, 9, 168, 56, 7, 92, 4)
