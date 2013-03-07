@@ -23,33 +23,40 @@ object PSO_Solver extends App {
   val v_max = 2.0
   val v_min = -2.0
   val repetitions = args(0).toInt
+  val inReps = 10
 
   val particles = Array.ofDim[Particle](popSize)
   val maxes = Array[Int] (42, 9, 168, 56, 7, 92, 4)
   var gBest = Array(0, 0, 0, 0, 0, 0, 0)
   var gBestFitness = 0.0
-  val fitnessFunction = new MSEPSOFitnessFunction(672, 1495)
+  val fitnessFunction = new MSEPSOFitnessFunction(args(1).toInt, args(2).toInt)
 
   var fitMap = new HashMap[Double, Int]()
   for (rep <- 0 until repetitions){
-    var genSame = 0
-    generatePopulation(particles)
-    for (gen <- 0 until nGens if genSame < gensToConverge) {
-      for (p <- particles) {
-        //new_update(p)
-        classic_update(p)
-        if (p.fitness > gBestFitness) {
-          gBest = p.x.clone
-          gBestFitness = p.fitness
-          //println(gBestFitness)
-          genSame = 0
+    var maxGBest = 0.0
+    for (inRep <- 0 until inReps) {
+      var genSame = 0
+      gBest = Array(0, 0, 0, 0, 0, 0, 0)
+      gBestFitness = 0.0
+      generatePopulation(particles)
+      for (gen <- 0 until nGens if genSame < gensToConverge) {
+        for (p <- particles) {
+          //new_update(p)
+          classic_update(p)
+          if (p.fitness > gBestFitness) {
+            gBest = p.x.clone
+            gBestFitness = p.fitness
+            //println(gBestFitness)
+            genSame = 0
+          }
         }
+        genSame = genSame + 1
       }
-      genSame = genSame + 1
+      if (gBestFitness > maxGBest) maxGBest = gBestFitness
     }
     //println("Best particle: " + gBest.deep.mkString(", "))
-    println("Best fitness: " + gBestFitness);
-    fitMap.put(gBestFitness, fitMap.getOrElse(gBestFitness, 0) + 1) 
+    println("Best fitness: " + maxGBest);
+    fitMap.put(maxGBest, fitMap.getOrElse(maxGBest, 0) + 1) 
   }
   val sorted = fitMap.values.toArray
   Sorting.quickSort(sorted)

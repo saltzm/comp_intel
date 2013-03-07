@@ -9,11 +9,11 @@ public class Particle {
     double fitness, pBestFit;
     byte[] x, pBest;
     double[] v;
-    MFDFitnessFunction fitFunc;
+    FitnessFunction fitFunc;
     Random rand; 
 
     public Particle (int dims, double c1, double c2, double vMin, double vMax, 
-                     double w, MFDFitnessFunction fitFunc) {
+                     double w, FitnessFunction fitFunc) {
         this.dims = dims; 
         this.c1 = c1; this.c2 = c2; this.vMin = vMin; this.vMax = vMax; this.w = w;
         this.fitFunc = fitFunc;

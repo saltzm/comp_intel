@@ -9,7 +9,7 @@ public class PSO {
         MFDFitnessFunction fitnessFunc = 
             new MFDFitnessFunction("TendencyMatrix10x25.txt", 10, 25);
         double[][] exResults = readExResults("ExhaustiveResults10x25.txt");
-        int nDis = 25, nGens = 500, inReps = 1 , noReps = 10, start = 1, finish = 1024;
+        int nDis = 25, nGens = 500, inReps = 10, noReps = 10, start = 1, finish = 1024;
         double threshold = 1e-7;
 
 

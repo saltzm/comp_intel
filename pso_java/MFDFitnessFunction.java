@@ -4,8 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 
-public class MFDFitnessFunction {
-   
+public class MFDFitnessFunction implements FitnessFunction {
+ 
     byte[] mPlus;
     double[] priorProb;
     double[][] tendencyMatrix;
