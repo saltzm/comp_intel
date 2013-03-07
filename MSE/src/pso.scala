@@ -1,4 +1,5 @@
-import scala.util.Random
+import scala.util.{Random, Sorting}
+import collection.mutable.HashMap
 
 case class Particle (x: Array[Int], v: Array[Double]) {
   var pBest = x.clone 
@@ -16,11 +17,12 @@ case class Particle (x: Array[Int], v: Array[Double]) {
 
 object PSO_Solver extends App {
   val r = new Random()
-  val popSize = 5000
+  val popSize = 100
   val nGens = 100000
-  val gensToConverge = 1000
+  val gensToConverge = 15000
   val v_max = 1.0
   val v_min = -1.0
+  val repetitions = args(0).toInt
 
   val particles = Array.ofDim[Particle](popSize)
   val maxes = Array[Int] (42, 9, 168, 56, 7, 92, 4)
@@ -28,28 +30,36 @@ object PSO_Solver extends App {
   var gBestFitness = 0.0
   val fitnessFunction = new MSEPSOFitnessFunction(672, 1495)
 
-  var genSame = 0
-  generatePopulation(particles)
-  for (gen <- 0 until nGens if genSame < gensToConverge) {
-    for (p <- particles) {
-      //new_update(p)
-      classic_update(p)
-      if (p.fitness > gBestFitness) {
-        gBest = p.x.clone
-        gBestFitness = p.fitness
-        println(gBestFitness)
-        genSame = 0
+  var fitMap = new HashMap[Double, Int]()
+  for (rep <- 0 until repetitions){
+    var genSame = 0
+    generatePopulation(particles)
+    for (gen <- 0 until nGens if genSame < gensToConverge) {
+      for (p <- particles) {
+        //new_update(p)
+        classic_update(p)
+        if (p.fitness > gBestFitness) {
+          gBest = p.x.clone
+          gBestFitness = p.fitness
+          //println(gBestFitness)
+          genSame = 0
+        }
       }
+      genSame = genSame + 1
     }
-    genSame = genSame + 1
+    //println("Best particle: " + gBest.deep.mkString(", "))
+    println("Best fitness: " + gBestFitness);
+    fitMap.put(gBestFitness, fitMap.getOrElse(gBestFitness, 0) + 1) 
   }
-  println("Best particle: " + gBest.deep.mkString(", "))
-  println("Best fitness: " + gBestFitness);
+  val sorted = fitMap.values.toArray
+  Sorting.quickSort(sorted)
+  val sum = sorted.sum
+  for (a <- sorted) println(a.toDouble/sum)
 
   def new_update(p: Particle) {
-     val c1 = 3
-  val c2 = 2
-  for (d <- 0 until p.x.length) {
+    val c1 = 3
+    val c2 = 2
+    for (d <- 0 until p.x.length) {
       p.v(d) = c1 * r.nextDouble() * (p.pBest(d) - p.x(d)) + 
                c2 * r.nextDouble() * (gBest(d) - p.x(d))
       p.x(d) = math.max(0, p.v(d).toInt % maxes(d))
