@@ -52,7 +52,7 @@ object MSESolver extends App {
   for (rep <- 0 until repetitions) {
     var maxFitness = 0.0
     for (inRep <- 0 until innerRepetitions) {
-      println(rep)
+      println(rep+", "+inRep)
       var currentTopFitness = 0.0
       var convergenceCounter = 0.0
       val selectionEngine = new TournamentSelectionEngine(bracketSize, 1, elitism) 
@@ -76,14 +76,17 @@ object MSESolver extends App {
         //println(selectionEngine.topInd.fitness)
         if (selectionEngine.topInd.fitness == currentTopFitness) convergenceCounter += 1 
         else {currentTopFitness = selectionEngine.topInd.fitness; convergenceCounter = 0}
+        //println(selectionEngine.topInd.fitness)
       }
-      if (selectionEngine.topInd.fitness > maxFitness ) 
-        maxFitness = selectionEngine.topInd.fitness
+      if (selectionEngine.topInd.fitness > maxFitness ) {
+        maxFitness = selectionEngine.topInd.fitness 
+        println(selectionEngine.topInd.genes.deep.mkString(", "))
+      }
     }
     fitMap.put(maxFitness, fitMap.getOrElse(maxFitness, 0) + 1)
     println(maxFitness)
   }
-  println("WEAHDFLDKFLWKJERLWELR")
+  println("-----------------------")
   val sorted = fitMap.values.toArray
   Sorting.quickSort(sorted)
   val sum = sorted.sum

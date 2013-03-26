@@ -33,5 +33,5 @@ class MidtermPSOFitnessFunction {
 
 object MidFitTest extends App {
   val func = new MidtermPSOFitnessFunction
-  println(func.f(1.11061,1.11061))
+  println(func.f(-1.1101486945506736,-1.6689304516148695E-4))
 }

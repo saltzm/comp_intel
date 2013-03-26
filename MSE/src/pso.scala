@@ -23,18 +23,20 @@ object PSO_Solver extends App {
   val v_max = 2.0
   val v_min = -2.0
   val repetitions = args(0).toInt
-  val inReps = 10
+  val inReps = args(1).toInt
 
   val particles = Array.ofDim[Particle](popSize)
   val maxes = Array[Int] (42, 9, 168, 56, 7, 92, 4)
   var gBest = Array(0, 0, 0, 0, 0, 0, 0)
   var gBestFitness = 0.0
-  val fitnessFunction = new MSEPSOFitnessFunction(args(1).toInt, args(2).toInt)
+  val fitnessFunction = new MSEPSOFitnessFunction(args(2).toInt, args(3).toInt)
 
   var fitMap = new HashMap[Double, Int]()
   for (rep <- 0 until repetitions){
     var maxGBest = 0.0
+    var maxGBInd = Particle(Array(), Array())
     for (inRep <- 0 until inReps) {
+      println(rep + ", " + inRep)
       var genSame = 0
       gBest = Array(0, 0, 0, 0, 0, 0, 0)
       gBestFitness = 0.0
@@ -50,11 +52,15 @@ object PSO_Solver extends App {
             genSame = 0
           }
         }
+        //println(gBestFitness)
         genSame = genSame + 1
       }
-      if (gBestFitness > maxGBest) maxGBest = gBestFitness
+      if (gBestFitness > maxGBest) { 
+        maxGBest = gBestFitness
+        maxGBInd = Particle(gBest, Array())
+      }
     }
-    //println("Best particle: " + gBest.deep.mkString(", "))
+    println("Best particle: " + maxGBInd.x.deep.mkString(", "))
     println("Best fitness: " + maxGBest);
     fitMap.put(maxGBest, fitMap.getOrElse(maxGBest, 0) + 1) 
   }

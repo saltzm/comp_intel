@@ -1,0 +1,30 @@
+PSO: 
+200, 1000:  
+    Repeatability: 100%
+    Best fitness:  679.57
+
+672, 1495:
+    Repeatability: 100%
+    Best fitness: 379.28*
+
+700, 50:
+    Repeatability:          100%
+    Best fitness:           186.99
+    Time:                   103m20.583s 
+    Average time per run:   6 seconds
+
+GA:
+200, 1000:  
+    Repeatability: 97.6%
+    Best fitness:  679.57
+    Average time per run: 1.6 seconds
+
+672, 1495:
+    Repeatability: 99.8%
+    Best fitness: 379.28*
+
+700, 50:
+    Repeatability:          95.9%
+    Best fitness:           186.99
+
+* Verified as correct by exhaustive search

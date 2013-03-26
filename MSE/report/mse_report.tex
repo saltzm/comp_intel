@@ -1,0 +1,68 @@
+\documentclass[12pt,fleqn]{article}
+\usepackage{graphicx, array}
+
+\title{\bf Nature-inspired Methods for Solving the Multiple Subscriber Equipment Problem}
+
+\author{Matthew Saltz \\
+        The University of Georgia \\
+        Athens, Georgia 30602 U.S.A.}
+
+\date{2013 March 18}
+
+\begin{document}
+\maketitle
+\section{Introduction}
+This paper details the results of different methods for solving the problem of optimally purchasing
+mobile subscriber equipment for battlefield communications network configurations.  
+The two methods used are nature-inspired, with one being a genetic algorithm and the 
+other using particle swarm optimization.  Because the search space is large, these
+heuristic techniques are necessary if these tools are to be used in a real-time setting;
+for example, as part of a software for tutoring future field agents.  
+\section{Experimentation}    
+The input to the algorithms is the number of DNVTs and the number of MSRTs required to be supported. We tested each method on three different DNVT/MSRT combinations. To judge the fitness of a result, we ensure that no item purchased lies outside the quantity restraints for that item, and we penalize purchases that yield more functionality than necessary.  We also, of course, measure the degree to which a given configuration of purchases can support the inputs. We ran each of the
+algorithms 1000 times, and measured the percentage of times that each obtained the result with the maximum fitness (relative to its other results). We call this measure {\em repeatability}. For one of these inputs, we verified that the best configurations given by both algorithms 
+matched the best configuration as given by exhaustive search. Each algorithm also gave the same output for each input pair. It can be seen in Figure~\ref{fig:results} that the repeatability of both methods is very high.  The PSO method always achieved 100\% repeatability, but suffered a slight time tradeoff.  However, given that it only took 6 seconds on average to run, this extra delay might be worth the additional repeatability benefits.  Due to the fact that one result
+was verified with exhaustive search (the first in Figure~\ref{fig:configs} and that the algorithms agree with each other, these repeatabilities seem
+to indicate that the algorithms are reliable in finding optimal or close to optimal results. Specific purchasing orders given by the algorithms are shown for several different DNVT/MSRT pairs in Figure~\ref{fig:configs}. 
+
+\begin{figure}
+{\small
+\begin{center}
+    \begin{tabular}{ | l | l | l | }
+    \hline
+    Solution Type               &  Average Repeatability (\%) & Average Runtime (s) \\ \hline
+    Genetic Algorithm           &  97.8                       & 1.6  \\ \hline
+    Particle Swarm Optimization &  100                        & 6 \\ \hline
+    \end{tabular}
+\end{center}
+}
+\caption{Comparison of Results Between Algorithms}
+\label{fig:results}
+\end{figure}
+
+\begin{figure}
+{\small
+\begin{center}
+\begin{tabular}{ | l | l !{\vrule width 2pt} l | l | l | l | l | l | l !{\vrule width 2pt} l |}
+\hline
+MSRT & DNVT & NC & LEN & SEN-1 & SEN-2 & SCC & RAU & NAI & Fitness \\ \hline
+672 & 1495  & 9  & 0   & 33    & 11    & 0   & 27  & 0   & 379.28  \\ \hline 
+200 & 1000  & 5  & 0   & 23    & 7     & 0   & 8   & 0   & 679.57  \\ \hline
+700 & 50    & 4  & 0   & 3     & 1     & 0   & 28  & 0   & 186.99  \\ \hline
+\end{tabular}
+\end{center}
+}
+\caption{Resulting configurations and fitnesses obtained by both the GA and the PSO algorithm}
+\label{fig:configs}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9]\textwidth]{./ga_fitness}
+\caption{Each trial consisted of 10 actual iterations of the algorithm, and the best individual from any iteration was chosen as the result of that 
+\end{figure}
+
+
+
+\end{document}
+

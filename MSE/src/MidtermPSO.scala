@@ -23,8 +23,8 @@ object MidtermPSO_Solver extends App {
     gBestFitness = particles(0).fitness 
     for (gen <- 0 until nGens if genSame < gensToConverge) {
       for (p <- particles) {
-        new_update(p)
-        //classic_update(p)
+        //new_update(p)
+        classic_update(p)
         if (p.fitness > gBestFitness) {
           gBest = p.x.clone
           gBestFitness = p.fitness

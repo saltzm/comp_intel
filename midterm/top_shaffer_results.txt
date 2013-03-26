@@ -1,0 +1,16 @@
+    
+c:  0.9975441418285032
+me: 0.997544141828458
+gs: 0.9975441418284994
+ga: 0.9975441418285029 (adaptive mutation with 0.2 max mutation rate and 100 gens to convergence, also same value with standard ga, 200 gens to conv, and 0.05 mutProb)    
+adaptive 3:  maxMutProb = 0.1 popsize = 5000 gentocon = 500 crossprob = 0.5 bracketsize = 10
+adaptive 4:
+maxMutProb = 0.1
+popsize = 5000
+gentocon = 500
+bracketSize = 16
+
+adaptive 5 = same as ad 4 <---  best GA fit
+
+adjCross:
+same as adaptive 4 but with adjusted crossover

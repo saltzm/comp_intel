@@ -1,0 +1,59 @@
+
+
+So far, the neural networks we've looked at have all dealt with supervised learning
+    -> We have a set of input/output pairs (x^i, y^i) with which to train
+       the network.  
+    -> From these pairs, we try to minimize squared error between the neural net's 
+       outputs vs the actual outputs in order to create a network that will 
+       generalize well (hopefully) to new inputs.
+
+However, in choosing the structures of these networks, we have to choose ourselves
+which features to use for the input layer.  For problems such as computer vision
+and image or audio recognition, it is not always obvious what features to use.  
+It would be really nice if we could select features algorithmically
+
+One major problem: feature selection
+    can be complex for a lot of problems
+    want a way to algorithmically select features
+    One solution: sparse autoencoder
+
+Unsupervised
+    works on unlabeled data
+    given a set of samples x1, x2, ..., xm, use y1 = x1, y2 = x2, etc. as your target
+    variables for training -> approximate the identity function
+    if the number of hidden nodes is less than the number of inputs (image), then
+    the network is learning a compressed representation of the input
+    if the input data is random, this is very hard to do
+        -> but if there are patterns in the data, this can draw them out, providing
+           a more compact representation of the input and giving insight into what 
+           features are most important in identifying the input
+    each node in the hidden layer represents a key feature of the input
+
+image example 10x10 100 inputs 50 hidden nodes -> 100 outputs
+
+sparsity constraint
+    # hidden nodes does not have to be small
+    impose a sparsity constraint -> makes sure nodes in the hidden layer only become
+    active rarely -> less than 0.05 of the time for example
+        output near 0 -> inactive, output near 1 -> active (sigmoid function)
+        this ensures that a feature is distinctive -> you don't want a node to be active
+        for all images -> this doesn't help anything
+
+how to enforce this
+    add a penalty to the function we want to optimize (cost function)
+    based on how far the average deviation from the sparsity parameter is in the hidden
+    layer (equations)
+    on back propogation, weights will be adjusted to try to fit the activation to 
+    the sparsity parameter
+    (picture of penalty function KL-divergence)
+implementation detail
+    must know p_i before performing back propogation
+        -> make a forward pass through all training samples, keeping track of p_i
+        -> go back through and do back propogation
+
+
+
+
+
+learn features with a sparse autoencoder
+    

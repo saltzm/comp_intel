@@ -1,0 +1,371 @@
+\documentclass{beamer}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usetheme{Warsaw}
+\usecolortheme{lily}
+
+
+
+\begin{document}
+\title{ "Optimal Bundling Strategies for Cable Companies"} 
+\author{Derek Ponticelli}
+\date{\today} 
+
+\frame{\titlepage} 
+
+\frame{\frametitle{Table of contents}\tableofcontents} 
+
+
+\section{Problem Overview} 
+\frame{\frametitle{How can cable tv and internet providers maximize profits?} 
+ Unique product and cost structures require cable providers to investigate complex pricing policies
+
+
+\begin{columns}[c]
+\column{2in}
+
+\begin{itemize}
+\item Multiproduct monopolist with substitutable products
+\item Capacity constraint creates a nearly vertical cost curve
+\item Bundling, Usage Based Pricing, 3-Part Tariffs
+\end{itemize}
+
+\column{2in}
+\begin{figure}[h]
+%\includegraphics[width=1.5in]{Vertical_Costs.jpg}
+\caption{Aggregate Demand and Marginal Cost Curves for Internet Providers}
+\label{Vertical Costs}
+\end{figure}
+\end{columns}
+
+
+}
+
+
+\section{Literature Review} 
+\frame{\frametitle{Literature Review}
+\begin{itemize}
+\item Adams and Yellen (1976)
+	\begin{itemize}
+	\item Provided examples illustrating cases when pure or mixed bundling could outperform separate pricing models
+	\end{itemize}
+\item McAfee, McMillan, and Whinston (1989)
+	\begin{itemize}
+	\item Develop reservation price model for a multiproduct monopolist
+	\item Consumers purchase at most 1 unit of either good and value them independently
+	\item MMW prove that mixed bundling is always weakly better than pure bundling and investigate necessary and sufficient conditions for mixed bundling to outperform separate pricing as well
+	\end{itemize}
+\item Venkatesh and Kamakura (2003)
+	\begin{itemize}
+	\item Extend MMW to consider special cases of multiproduct monopolists selling complements and substitutes
+	\end{itemize}
+\end{itemize} 
+}
+
+
+\section{Model Specification} 
+\subsection{Basic Model}
+\frame{\frametitle{Basic Model Specification}
+\begin{columns}[c]
+
+\column{3in}
+\begin{itemize}
+\item Multiproduct monopolist sells two substitutes and bundle at prices $p_1, p_2, p_b$
+\item Consumers' valuations $(v_1,v_2)$ for the goods fall on continuous uniform distributions from 0 to 1
+\item Consumers purchase at most one unit and have marginal utility from good i:
+	$
+	mu_{i} (v_i)= 
+	\begin{cases}
+	v_i & : q_j=0 \\
+	\beta*v_i & :q_j=1
+	\end{cases}
+	$
+\item Monopolist seeks to maximize profits while constrainting internet consumption below some cap, $c$. 
+\end{itemize} 
+
+\column{2in}
+\begin{figure}[h]
+%\includegraphics[width=1in]{unshaded_general_picture.jpg}
+\caption{5 Consumer Types}
+\label{Unshaded Consumer Regions}
+
+%\includegraphics[width=1in]{shaded_general_picture.jpg}
+\caption{Internet Users}
+\label{Shaded Internet Consumers}
+\end{figure}
+
+\end{columns}
+}
+
+\subsection{Special Cases}
+\frame{\frametitle{$\beta = 0$ Page 1}
+
+\begin{columns}[c]
+
+\column{2.5in}
+\begin{itemize}
+\item $\beta = 0$ implies perfect crowdout so that no one will purchase both goods
+\item Without a capacity constraint, max profit $= \frac{2}{3 \sqrt{3}} \approx .385$ and is achieved when $p_1=p_2=\frac{1}{\sqrt{3}} \approx .577$
+\item This means a cap will only bind if it is $\leq \frac{1}{3}$
+\item Green area $= \frac{1}{2} - p_1 + p_2 +\frac{p^2_1}{2}- p_1 p_2$
+\item Red area $=\frac{1}{2} + p_1 -p_2 -\frac{p^2_1}{2}$
+\end{itemize}
+
+\column{2.5in}
+\begin{figure}[h]
+%\includegraphics[width=1.5in]{beta_zero_general.jpg}
+\caption{$p_1=.5, p_2=.5$}
+\label{beta0_general}
+\end{figure}
+\begin{itemize}
+\item Revenue $= \frac{p_1}{2}+\frac{p_2}{2}-p^2_1 - p^2_2 +2 p_{1} p_{2}-\frac{3}{2} p^2_1 p_2 + \frac{p^3_1}{2}$
+\end{itemize}
+\end{columns}
+}
+
+\frame{\frametitle{$\beta = 0$ Page 2}
+\begin{itemize}
+\item We want to maximize $\frac{p_1}{2}+\frac{p_2}{2}-p^2_1 - p^2_2 +2 p_{1} p_{2}-\frac{3}{2} p^2_1 p_2 + \frac{p^3_1}{2}+\lambda (c - ( \frac{1}{2} - p_1 + p_2 +\frac{p^2_1}{2}- p_1 p_2))$ where $c \in (0,\frac{1}{3})$
+\item So, the optimal $p_1$ and $p_2$ are implicitly defined by the solution to the system: 
+	\begin{itemize}	
+	\item $(1-p_1) \left[\frac{1}{2}-2 p_1+2 p_2-3 p_1 p_2+\frac{3}{2} p^2_1 \right] = (p_1 - p_2 -1)\left[\frac{1}{2} - 2  p_2 + 2 p_1 - \frac{3}{2} p^2_1\right]$
+	\item $p_2 = \frac{c-\frac{1}{2} + p_1 - \frac{p^2_1}{2}}{1-p_1}$
+	\end{itemize}
+\end{itemize}
+\begin{figure}[h]
+\begin{minipage}[b]{.3\linewidth}
+\centering
+%\includegraphics[width=1.5in]{beta_zero_p1.jpg}
+\caption{$P_1$}
+\label{Beta Zero $P_1$}
+\end{minipage}
+\quad
+\begin{minipage}[b]{.3\linewidth}
+\centering
+%\includegraphics[width=1.5in]{beta_zero_p2.jpg}
+\caption{$P_2$}
+\label{Beta Zero $P_2$}
+\end{minipage}
+\quad
+\begin{minipage}[b]{.3\linewidth}
+\centering
+%\includegraphics[width=1.5in]{beta_zero_profit.jpg}
+\caption{Profit}
+\label{Beta Zero Profit}
+\end{minipage}
+\end{figure}
+}
+
+
+
+\frame{\frametitle{$\beta = 1$ Page 1}
+\begin{columns}[c]
+
+\column{3in}
+\begin{itemize}
+\item $\beta = 1$ implies that there is no crowd out effect and marginal utilities are constant
+\item In absence of a bundle, optimal pricing strategy is $p_1 = p_2 = \frac{1}{2}$, profit $=\frac{1}{2}$, and cap would bind at $c=\frac{1}{2}$
+\item With a bundle, optimal pricing strategy is $p_1 = p_2 =\frac{1}{27} (2\sqrt{61}-1) \approx .54, p_b = \frac{11}{54}+\frac{5}{54}\sqrt{61} \approx .926$
+\item Then, the maximum revenue is $\frac{182}{2187}+\frac{122}{2187}\sqrt{61} \approx .51891$ and the cap would bind at $c \approx .530083$
+\end{itemize}
+
+\column{2in}
+\begin{figure}[h]
+%\includegraphics[width=.9in]{beta_one_no_bundle.jpg}\
+\caption{No Bundle}
+\label{beta1_no_bundle}
+
+%\includegraphics[width=.9in]{beta_one_bundle.jpg}
+\caption{Bundle}
+\label{beta1_bundle}
+
+\end{figure}
+\end{columns}
+}
+
+\frame{\frametitle{$\beta = 1$ Page 2}
+\begin{columns}[c]
+
+\column{3.5in}
+\begin{itemize}
+\item TV consumer area (red)= $(1-p_2)(p_b-p_2)$
+\item Bundle consumer area (blue)= $(p_1 + p_2 - p_b)(2-p_1-p_2)+(1-p_1)(1-p_2)$
+\item Internet consumer area (green) = $(1-p_1)(p_b-p_1)$
+\item $R(p_1,p_2,p_b) = 2 p_b (p_1+p_2-p^2_1-p^2_1)+p_b-p^2_1-p^2_2+p^3_1+p^3_2+p^2_b (p_1+p_2) - p_1 p_2 p_b$
+\item Our goal is to maximize: $$\pi(p_1,p_2,p_b,\lambda) = R(p_1,p_2,p_b) + \lambda\left[c-1-p_2+p_b+p_1 p_2- p_2 p_b +p^2_2\right]$$ where $c \in (0,.530084)$
+\end{itemize}
+
+\column{1.5in}
+\begin{figure}[h]
+%\includegraphics[width=1in]{beta_one_bundle.jpg}
+\caption{Bundle}
+\label{beta1_bundle}
+\end{figure}
+
+\end{columns}
+
+}
+
+\frame{\frametitle{$\beta =1$ Page 3}
+ We can use the first order conditions to establish a system of 4 equations and 4 unknowns to find the following as function of $c$:
+
+\begin{columns}[c]
+\column{2in}
+\begin{figure}[h]
+%\includegraphics[width=1.5in]{beta1_profit.jpg}
+\caption{Profit}
+\label{beta1_profit}
+%\includegraphics[width=1.5in]{beta1_p2.jpg}
+\caption{$P_2$}
+\label{beta1_p2}
+\end{figure}
+
+\column{2in}
+\begin{figure}[h]
+%\includegraphics[width=1.5in]{beta1_p1.jpg}
+\caption{$P_1$}
+\label{beta1_p1}
+%\includegraphics[width=1.5in]{beta1_pb.jpg}
+\caption{$P_b$}
+\label{beta1_pb}
+\end{figure}
+
+\end{columns}
+}
+
+\subsection{General Model Results}
+\frame{\frametitle{General Model Page 1}
+
+\begin{itemize}
+\item The region of consumers who purchase the bundle can take on many different forms depending on the value of $\beta$ and the relative bundle price
+\item "Skinny" Cone: $\beta > \frac{1}{2} , \beta (p_1+p_2) \leq p_b < (1-\beta) p_1 + \beta p_2+ 2 \beta -1$
+\item "Fat" Cone: $\beta>\frac{1}{2}, p_b < \beta (p_1+p_2)$
+\item $\beta = 0$ Case: $\beta> \frac{1}{2}, p_b > (1-\beta) p_1 + \beta p_2+ 2 \beta -1$
+\end{itemize}
+
+\begin{figure}[h]
+\begin{minipage}{.28\linewidth}
+\centering
+%\includegraphics[width=.9in]{general_skinny_cone.jpg}
+\caption{"Skinny" }
+\label{skinny}
+\end{minipage}
+\begin{minipage}{.28\linewidth}
+\centering
+%\includegraphics[width=.9in]{general_fat_cone.jpg}
+\caption{"Fat" }
+\label{fat}
+\end{minipage}
+\begin{minipage}{.28\linewidth}
+\centering
+%\includegraphics[width=.9in]{beta_zero_general.jpg}
+\caption{$\beta = 0 $ }
+\label{beta0_general}
+\end{minipage}
+\end{figure}
+
+}
+
+
+\frame{\frametitle{General Model Page 2}
+
+\begin{itemize}
+\item Reverse "Skinny" Cone: $\beta < \frac{1}{2} , \beta (p_1+p_2) > p_b \geq (1-\beta) p_1 + \beta p_2+ 2 \beta -1$
+\item Reverse "Fat" Cone: $\beta<\frac{1}{2}, p_b <  (1-\beta) p_1 + \beta p_2+ 2 \beta -1$
+\item $\beta = 0$ Case: $\beta< \frac{1}{2}, p_b >  \beta (p_1+p_2) $
+\end{itemize}
+
+\begin{figure}[h]
+\begin{minipage}{.28\linewidth}
+\centering
+%\includegraphics[width=.9in]{general_reverse_skinny.jpg}
+\caption{"Skinny"}
+\label{Rskinny}
+\end{minipage}
+\begin{minipage}{.28\linewidth}
+\centering
+%\includegraphics[width=.9in]{general_reverse_fat.jpg}
+\caption{"Fat"}
+\label{Rfat}
+\end{minipage}
+\begin{minipage}{.28\linewidth}
+\centering
+%\includegraphics[width=.9in]{beta_zero_general.jpg}
+\caption{$\beta = 0 $ }
+\label{beta0_general}
+\end{minipage}
+\end{figure}
+
+}
+
+
+\frame{\frametitle{General Model Page 3}
+
+\begin{columns}[c]
+
+\column{3in}
+\begin{itemize}
+\item Parallel Regions: $\beta = \frac{1}{2} , \beta (p_1+p_2) > p_b $
+\item $\beta = 0$ Case: $\beta = \frac{1}{2}, p_b \geq  \beta (p_1+p_2) $
+\vspace{.2in}
+\item As $\beta $ changes, the monopolist may prefer to offer the bundle to different consumers
+\item When solving for general solutions in terms of $\beta$ and $c$, one must be careful in dealing with the number of choices for the monopolist
+\end{itemize}
+
+\column{2in}
+\begin{figure}[h]
+%\includegraphics[width=.9in]{general_parallel_lines.jpg}
+\caption{Parallel}
+\label{parallel}
+%\includegraphics[width=.9in]{beta_zero_general.jpg}
+\caption{$\beta = 0 $ }
+\label{beta0_general}
+\end{figure}
+
+\end{columns}
+
+}
+
+\frame{\frametitle{General Model Page 4}
+ Numerical results from maximizing profits when $\beta = .8$ leave many questions unanswered
+
+\begin{columns}[c]
+\column{2in}
+\begin{figure}[h]
+%\includegraphics[width=1.5in]{skinny_cone_top_profit.jpg}
+\caption{Profit}
+\label{beta1_profit}
+%\includegraphics[width=1.5in]{skinny_cone_top_p2.jpg}
+\caption{$P_2$}
+\label{beta1_p2}
+\end{figure}
+
+\column{2in}
+\begin{figure}[h]
+%\includegraphics[width=1.5in]{skinny_cone_top_p1.jpg}
+\caption{$P_1$}
+\label{beta1_p1}
+%\includegraphics[width=1.5in]{skinny_cone_top_pb.jpg}
+\caption{$P_b$}
+\label{beta1_pb}
+\end{figure}
+
+\end{columns}
+}
+
+\section{Possible Research Extensions}
+\frame{\frametitle{Next Steps and Future Goals}
+\begin{itemize}
+\item Investigate how demand theoretically shifts as monopolists increase internet prices
+\item Reach analytic conclusions for a general $\beta > \frac{1}{2}$ and $\beta < \frac{1}{2}$
+	\begin{itemize}
+	\item Or possibly, numeric conclusions after further exhausting possibilities
+	\end{itemize}
+\item Anticipating a decline in $\beta$, predict dynamic pricing strategy for monopolists
+\item Introducing a more complex consumption funtion to allow for non-linear pricing strategy (3 part tariffs)
+\item Empirical testing, matching model predictions with data, looking for demand shifts
+\end{itemize}
+}
+
+\end{document}
+
