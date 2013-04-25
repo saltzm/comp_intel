@@ -44,6 +44,7 @@ object MSESolver extends App {
   val dnvt = args(3).toInt
   val fitFunc = new MSEFitnessFunction(msrt, dnvt)
   val maxes = Array[Int] (42, 9, 168, 56, 7, 92, 4)
+  val mins = Array[Int] (1, 0, 0, 0, 1, 0, 0)
   var members = Array.ofDim[MSEGenotype](populationSize)
   val r = new Random()
 
@@ -131,7 +132,7 @@ object MSESolver extends App {
     var mutated = false
     for (i <- 0 until g.genes.length) {  //TODO: may be an issue
       if (r.nextDouble < prob) {
-        g.genes(i) = r.nextInt(maxes(i) + 1) //TODO: might suck    
+        g.genes(i) = r.nextInt(maxes(i) + 1 - mins(i)) + mins(i) //TODO: might suck    
         //g.genes(i) = (g.genes(i) + r.nextInt(10)) % maxes(i)
         //g.genes(i) = math.min(math.max(g.genes(i) + r.nextInt(maxes(i)/2)*math.pow(-1, r.nextInt(2)).toInt, 0), maxes(i))
         //g.genes(i) = math.min(math.max(g.genes(i) + r.nextInt(10)*math.pow(-1, r.nextInt(2)).toInt, 0), maxes(i))
@@ -148,13 +149,13 @@ object MSESolver extends App {
     //generate the population
     for (i <- 0 until populationSize) {
       members(i) = MSEGenotype( 
-                     Array[Int](r.nextInt(maxes(0) + 1),
-                            r.nextInt(maxes(1) + 1), 
-                            r.nextInt(maxes(2) + 1),
-                            r.nextInt(maxes(3) + 1),                             
-                            r.nextInt(maxes(4) + 1),
-                            r.nextInt(maxes(5) + 1),
-                            r.nextInt(maxes(6) + 1) ), fitFunc)
+                     Array[Int](r.nextInt(maxes(0) + 1 - mins(0)) + mins(0),
+                            r.nextInt(maxes(1) + 1 - mins(1)) + mins(1), 
+                            r.nextInt(maxes(2) + 1 - mins(2)) + mins(2),
+                            r.nextInt(maxes(3) + 1 - mins(3)) + mins(3),                             
+                            r.nextInt(maxes(4) + 1 - mins(4)) + mins(4),
+                            r.nextInt(maxes(5) + 1 - mins(5)) + mins(5),
+                            r.nextInt(maxes(6) + 1 - mins(6)) + mins(6) ), fitFunc)
     }
   }
 }

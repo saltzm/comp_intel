@@ -27,6 +27,7 @@ object PSO_Solver extends App {
 
   val particles = Array.ofDim[Particle](popSize)
   val maxes = Array[Int] (42, 9, 168, 56, 7, 92, 4)
+  val mins = Array[Int] (1, 0, 0, 0, 1, 0, 0)
   var gBest = Array(0, 0, 0, 0, 0, 0, 0)
   var gBestFitness = 0.0
   val fitnessFunction = new MSEPSOFitnessFunction(args(2).toInt, args(3).toInt)
@@ -75,7 +76,7 @@ object PSO_Solver extends App {
     for (d <- 0 until p.x.length) {
       p.v(d) = c1 * r.nextDouble() * (p.pBest(d) - p.x(d)) + 
                c2 * r.nextDouble() * (gBest(d) - p.x(d))
-      p.x(d) = math.max(0, p.v(d).toInt % maxes(d))
+      p.x(d) = math.max(mins(d), p.v(d).toInt % maxes(d))
     }
     calculateFitness(p)
   }
@@ -88,7 +89,7 @@ object PSO_Solver extends App {
       p.v(d) = w * p.v(d) +
                c1 * r.nextDouble() * (p.pBest(d) - p.x(d)) + 
                c2 * r.nextDouble() * (gBest(d) - p.x(d))
-      p.x(d) = math.max(0, math.min(p.x(d) + p.v(d).toInt, maxes(d)))
+      p.x(d) = math.max(mins(d), math.min(p.x(d) + p.v(d).toInt, maxes(d)))
     }
     calculateFitness(p)
   }
