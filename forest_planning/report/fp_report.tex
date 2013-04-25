@@ -1,0 +1,101 @@
+\documentclass[12pt,fleqn]{article}
+\usepackage{amsmath}
+
+\title{\bf Heuristic Solutions for the Forest Planning Problem}
+
+\author{Matthew Saltz \\
+        The University of Georgia \\
+        Athens, Georgia 30602 U.S.A.}
+
+\date{2013 April 21}
+
+\begin{document}
+\maketitle
+\section{Introduction}
+The goal of the forest planning (FP) problem is to maximize timber harvest
+in a forest over a given number of time periods \cite{bettinger}. The forest consists
+of a finite number of stands (non-overlapping regions), and a solution
+to the problem consists of a harvest schedule over these stands.  In 
+other words, given a target harvest for each time period, 
+we want to assign a time slot to each of the stands such that our 
+harvest in each time period is closest to the target.  Specifically,
+we seek to find a schedule that minimizes the following equation:
+\begin{equation}
+\sum_{t = 1}^{nPeriods} (H_t - T)^2 
+\label{eq:error}
+\end{equation}
+where $H_t$ is the harvest volume at time period $t$ and $T$ is the target
+harvest per time period. However, due to the nature of the problem,
+the schedule must abide by certain constraints. In order to prevent
+erosion and other land maintenance issues, no two adjacent stands
+may be scheduled for the same time period. This greatly increases
+the complexity of the problem.  In this paper, we consider
+two heuristic solutions, one being a genetic algorithm
+and the other being a particle swarm optimization (PSO) algorithm. The
+PSO solution is shown to outperform other attempts at using PSO for the
+FP problem, though it is still inferior to other algorithms for this problem.
+
+\section{Fitness}
+Both algorithms attempt to minimize the same fitness function, which is
+based on Equation~\ref{eq:error}. In addition, we add a penalty of 
+$$ln(n+1) * nPeriods * T^2$$ where $n$ is the number of adjacency violations in 
+the schedule (the number of adjacent stands that are scheduled for the same 
+time period.  Because $nPeriods * T^2$ is the worst possible
+fitness of a schedule with no violations, it is not possible for
+a schedule with violations to have a higher fitness than a schedule without
+violations. For the GA, this allows positive genetic material to be retained
+from individuals with violations, while discouraging the propagation of 
+those individuals themselves, and for the PSO, it guides particles away 
+from adjacency violations and towards valid solutions.
+
+\section{Experimentation}
+
+\subsection{Genetic Algorithm Setup}
+
+\subsection{PSO Setup}
+The PSO setup for this problem was rather unusual.  With normal parameter settings,
+the algorithm behaved poorly, obtaining solutions with fitness no better than
+$10^8$.  However, with some adjustments, performance increased dramatically, so that
+results were better than those reported in \cite{potter}.  The key changes
+were to use a cognitive factor of 3 and a social factor of 1, and to lower the inertia value 
+to 0.1.  Velocities were allowed to be between -2 and 2.  Results can be found in Figure~\ref{fig:results}.
+
+\begin{figure}
+\begin{centering}
+\begin{tabular}{ | l | l | l | l |}
+\hline
+                & GA         & PSO     \\ \hline
+Average Fitness & 1495       & 17,893,380     \\ \hline 
+Best Fitness    & 1000       & 7012137    \\ \hline
+Worst Fitness   & 50         & 30,671,841     \\ \hline
+\end{tabular}
+\caption{Comparison of fitness between GA and PSO techniques over 100 trials.}
+\label{fig:results}
+\end{centering}
+\end{figure}
+
+\begin{figure}
+\begin{centering}
+\begin{tabular}{ | l | l | l | l | l |}
+\hline
+                & Integer Programming &GA         & Standard PSO      \\ \hline
+Time Period 1   & 33049.5             &1495       & 32523.75          \\ \hline 
+Time Period 2   & 32933.6             &1000       & 33259.88          \\ \hline
+Time Period 3   & 33399.4             &50         & 33133.29          \\ \hline
+\end{tabular}
+\caption{Harvests per time period for the best result of each search algorithm. The integer
+solution was taken from \cite{bettinger}. The target harvest per time period was 34,467 MBF 
+(million board feet) for each.}
+\label{fig:harvests}
+\end{centering}
+\end{figure}
+
+\begin{thebibliography}{9}
+\bibitem{bettinger}
+Bettinger, Pete, and Zhu, Jianping (2006) A New Heuristic Method for Solving Spatially Constrained Forest Planning Problems Based on Mitigation of Infeasibilities Radiating Outward from a Forced Choice. \emph{Silva Fennica}
+\bibitem{potter}
+Potter, W.D., Drucker, E., et al. (2008) Diagnosis, Configuration, Planning, and Pathfinding: Experiments in Nature-Inspired Optimization. \emph{Natural Intelligence for Scheduling, Planning and Packing Problems} pp. 267-294 
+\end{thebibliography}
+
+
+\end{document}

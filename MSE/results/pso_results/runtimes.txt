@@ -1,0 +1,2 @@
+Matthews-MacBook-Air:mse saltzm$ (time scala -cp out PSO_Solver 1000 10 672 1495) > results/pso_results/pso_results_672_1495real570m9.837            suser341m16.876ssys1m56.495sMatthews-MacBook-Air:mse saltzm$ (time                     scala -cp out PSO_Solver 1000 10 200 1000) > results/pso_results/pso_results_200_1000real216m18.624suser217m22.370ssys1m13.758sMatthews-MacBook-Air                                :mse saltzm$ (time scala -cp out PSO_Solver 1000 10 700 50) >
+results/pso_results/pso_results_700_50real192m18.638suser192m52.081ssys1m6.513s                         

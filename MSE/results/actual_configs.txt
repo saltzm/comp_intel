@@ -1,0 +1,52 @@
+GA
+
+scala -cp out MSESolver 1 1 672 1495
+0
+9, 0, 33, 11, 0, 27, 0
+379.28284646455614
+-----------------------
+1.0
+
+ scala -cp out MSESolver 1 1 700 50
+ 0
+ 4, 0, 3, 1, 0, 28, 0
+ 186.9868860992385
+ -----------------------
+ 1.0
+
+ scala -cp out MSESolver 1 1 200 1000
+ 0
+ 5, 0, 23, 7, 0, 8, 0
+ 679.5674474977077
+ -----------------------
+ 1.0
+
+PSO:::::::::::::::::::::::::::::::
+
+time scala -cp out PSO_Solver 1 672 1495
+Best particle: 9, 0, 33, 11, 0, 27, 0
+Best fitness: 379.28284646455614
+1.0
+
+real0m23.756s
+user0m24.154s
+sys0m0.205s     
+
+time scala -cp out PSO_Solver 1 700 50
+Best particle: 4, 0, 3, 1, 0, 28, 0
+Best fitness: 186.9868860992385
+1.0
+
+real0m12.007s
+user0m12.487s
+sys0m0.151s 
+
+time scala -cp out PSO_Solver 1 200 1000
+Best particle: 5, 0, 23, 7, 0, 8, 0
+Best fitness: 679.5674474977077
+1.0
+
+real0m13.837s
+user0m14.       326s
+sys0m0.156s 
+
