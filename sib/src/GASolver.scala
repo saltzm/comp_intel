@@ -32,19 +32,31 @@ class GASolver[T] (operators: Array[_ <: Product with Serializable with Operator
 object SIBSolver extends App {
   val crossoverProb = 0.7//0.7
   val mutationProb = 0.015//0.005
-  val popSize = 1000
-  val bracketSize = 8
+  val popSize = 100
+  val bracketSize = 4
   val elitism = true
   val maxGens = 100000
-  val gensToConverge = 500
+  val gensToConverge = 100
 
-  val dimension = 8  
+  val dimension = 6  
   val maxSnakeLength = math.pow(2, dimension).toInt 
 
-  //adaptiveCrossover best so far with nonzero mutation and 0.015 mut 
-  val operators = Array(TwoPointCrossover(crossoverProb), 
+  //best so far:
+  //twopointcrossover
+  //permutation pop generator
+  //nonzero mutation
+  //standard fitness function
+  // NEW BEST
+  // popSize 50000
+  // adaptiveCrossover
+  // nonzeromutation 0.015
+  // reversehybridfitness
+  // 1000 gens to converge
+  // bracketSize 4
+  // permutation pop generator
+  val operators = Array(AdaptiveCrossover(crossoverProb), 
                         SimpleNonZeroMutationSnake(mutationProb, dimension))
-  val fitnessFunction = new SnakeViolationBasedFitnessFunction(dimension)
+  val fitnessFunction = new ReverseFitnessFunction(dimension)
   val selector = new TournamentSelector[Int] (bracketSize, elitism, fitnessFunction)
   val populationGenerator = new SnakePermutationPopulationGenerator(maxSnakeLength, dimension)
   val solver = new GASolver(operators, selector, populationGenerator, popSize,

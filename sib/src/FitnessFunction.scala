@@ -12,7 +12,7 @@ class SnakeViolationBasedFitnessFunction (dimension: Int) extends FitnessFunctio
   override def getFitness[T](g: Genotype[T]): Double = {
     val genes = g.genes.map( x => x.asInstanceOf[Int] )
     var (snake, length) = buildSnake(genes)
-/*  for (i <- 0 until length + 1) {*/
+/* for (i <- 0 until genes.length){ //+ 1) {*/
       //genes(i) = snake(i) 
     /*}*/
     length - math.log(countViolations(genes))
